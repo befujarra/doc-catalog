@@ -1,0 +1,106 @@
+/* =============================================
+   SKILLS CATALOG — Custom overrides sobre Bootstrap
+   O restante é tratado pelo Bootstrap 5.3 dark mode.
+   ============================================= */
+:root {
+  --accent:     #6366f1;
+  --accent-h:   #818cf8;
+  --accent-dim: rgba(99, 102, 241, 0.15);
+  --trans:      0.2s ease;
+}
+
+/* Search */
+.search-icon {
+  position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--bs-secondary-color);
+  pointer-events: none; width: 16px; height: 16px;
+}
+.search-input { padding-left: 40px; padding-right: 38px; }
+.clear-btn {
+  position: absolute; right: 10px; top: 50%;
+  transform: translateY(-50%);
+  background: none; border: none;
+  color: var(--bs-secondary-color);
+  font-size: 1.2rem; line-height: 1;
+  cursor: pointer; padding: 0 4px;
+  transition: color var(--trans);
+}
+.clear-btn:hover { color: var(--bs-body-color); }
+
+/* Sidebar */
+.sidebar-sticky { position: sticky; top: 80px; }
+
+.filter-label {
+  font-size: 0.75rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--bs-secondary-color);
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 10px;
+}
+
+/* Category buttons */
+.category-btn {
+  width: 100%; text-align: left; background: none; border: none;
+  padding: 7px 10px; border-radius: 6px;
+  color: var(--bs-secondary-color); font-size: 0.9rem;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: background var(--trans), color var(--trans);
+}
+.category-btn:hover { background: var(--bs-tertiary-bg); color: var(--bs-body-color); }
+.category-btn.active { background: var(--accent-dim); color: var(--accent-h); font-weight: 600; }
+.category-btn.active .badge { background-color: var(--accent) !important; }
+
+/* Tag chips */
+.tag-chip {
+  background: var(--bs-tertiary-bg); color: var(--bs-info);
+  border: 1px solid transparent; border-radius: 20px;
+  padding: 3px 10px; font-size: 0.74rem;
+  cursor: pointer; transition: all var(--trans);
+}
+.tag-chip:hover { border-color: var(--bs-info); }
+.tag-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Card */
+.card {
+  transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--trans);
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border-color: var(--accent) !important;
+}
+.card:hover::before { transform: scaleX(1); }
+
+/* Card tags */
+.card-tag {
+  background: var(--bs-tertiary-bg); color: var(--bs-info);
+  border: 1px solid transparent; border-radius: 20px;
+  padding: 2px 8px; font-size: 0.73rem;
+  cursor: pointer; transition: all var(--trans);
+}
+.card-tag:hover { border-color: var(--bs-info); }
+
+/* Card link button */
+.btn-accent {
+  background: var(--accent-dim); color: var(--accent-h);
+  border: 1px solid transparent; font-size: 0.82rem;
+  transition: all var(--trans);
+}
+.btn-accent:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Highlight mark */
+mark {
+  background: rgba(99, 102, 241, 0.3);
+  color: var(--accent-h);
+  border-radius: 2px; padding: 0 2px;
+}
+

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Git e GitHub — Skills Catalog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" rel="stylesheet" />
+  <link href="../style.css" rel="stylesheet" />
+  <style>
+    .doc-section { padding: 2rem 0; border-bottom: 1px solid var(--bs-border-color); }
+    .doc-section:last-child { border-bottom: none; }
+    .section-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 1rem; }
+    .subsection-title { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.75rem; }
+    .toc-link { display: block; padding: 4px 10px; font-size: 0.85rem; color: var(--bs-secondary-color); text-decoration: none; border-left: 2px solid transparent; border-radius: 0 4px 4px 0; transition: all 0.2s; }
+    .toc-link:hover, .toc-link.active { color: var(--accent-h); border-left-color: var(--accent); background: var(--accent-dim); }
+    .toc-sub { padding-left: 20px; font-size: 0.8rem; }
+    pre { border-radius: 8px; font-size: 0.875rem; }
+    .callout { background: var(--accent-dim); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 12px 16px; font-size: 0.9rem; }
+    .tag-badge { background: var(--accent-dim); color: var(--accent-h); font-size: 0.7rem; letter-spacing: 0.08em; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar sticky-top border-bottom px-4 py-3">
+    <div class="d-flex align-items-center gap-3 w-100 flex-wrap">
+      <a href="../index.html" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1 flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Catálogo
+      </a>
+      <div class="d-flex align-items-center gap-2 flex-grow-1">
+        <span class="badge rounded-pill tag-badge">Ferramentas</span>
+        <h1 class="h6 mb-0 fw-bold">Git e GitHub</h1>
+      </div>
+      <small class="text-secondary flex-shrink-0">📅 2025</small>
+    </div>
+  </nav>
+
+  <div class="container-xl py-4 px-4">
+    <div class="row g-4 align-items-start">
+
+      <aside class="col-lg-3 d-none d-lg-block">
+        <div class="card p-3 sidebar-sticky">
+          <p class="filter-label mb-2">Nesta página</p>
+          <nav>
+            <a class="toc-link" href="#controle-versao">Controle de versão</a>
+            <a class="toc-link" href="#conceitos-basicos">Conceitos básicos</a>
+            <a class="toc-link" href="#fluxo-basico">Fluxo de trabalho básico</a>
+            <a class="toc-link toc-sub" href="#status-arquivos">↳ Status dos arquivos</a>
+            <a class="toc-link" href="#comandos-basicos">Comandos básicos</a>
+            <a class="toc-link" href="#boas-praticas">Boas práticas de commits</a>
+            <a class="toc-link" href="#semantic-versioning">Semantic Versioning</a>
+            <a class="toc-link" href="#branches">Branches</a>
+            <a class="toc-link toc-sub" href="#conceitos-branch">↳ Conceitos de branch</a>
+            <a class="toc-link toc-sub" href="#exemplo-real">↳ Exemplo real</a>
+            <a class="toc-link toc-sub" href="#fluxo-branches">↳ Trabalhando com branches</a>
+            <a class="toc-link" href="#conflitos-merge">Conflitos de merge</a>
+            <a class="toc-link" href="#repos-remotos">Repositórios remotos</a>
+            <a class="toc-link" href="#ssh-setup">SSH e setup inicial</a>
+            <a class="toc-link" href="#fork">Fork e contribuições</a>
+            <a class="toc-link" href="#gitignore">.gitignore</a>
+            <a class="toc-link" href="#fluxo-colaborativo">Fluxo colaborativo</a>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="col-lg-9">
+        <article>
+
+          <section class="doc-section" id="controle-versao">
+            <h2 class="section-title">📌 Controle de versão</h2>
+            <p>Versionamento ajuda a <strong>reverter</strong>, <strong>alternar entre versões</strong> e controlar todas as modificações feitas no projeto.</p>
+          </section>
+
+          <section class="doc-section" id="conceitos-basicos">
+            <h2 class="section-title">🧠 Conceitos básicos</h2>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent px-0"><strong>Repositório</strong> — como nos referimos ao projeto como um todo; o diretório raiz a partir do qual serão monitoradas todas as alterações.</li>
+              <li class="list-group-item bg-transparent px-0"><strong>Commit</strong> — é o ato de salvar uma ou mais alterações no código; também pode se referir ao conjunto dessas alterações.</li>
+              <li class="list-group-item bg-transparent px-0"><strong>Working tree</strong> — espaço de trabalho onde você faz modificações. Quando edita, cria ou deleta arquivos, as mudanças acontecem aqui.</li>
+              <li class="list-group-item bg-transparent px-0"><strong>Staging</strong> — área de preparação onde as alterações são separadas para serem salvas em um commit; permite escolher exatamente o que será salvo.</li>
+              <li class="list-group-item bg-transparent px-0"><strong>Branches</strong> — ramificações criadas a partir de um ponto no histórico do projeto para trabalhar paralelamente, sem afetar a ramificação principal.</li>
+            </ul>
+          </section>
+
+          <section class="doc-section" id="fluxo-basico">
+            <h2 class="section-title">🔄 Fluxo de trabalho básico</h2>
+            <ol class="d-flex flex-column gap-2 mb-4">
+              <li>Precisamos <strong>inicializar</strong> um novo repositório a partir de um diretório.</li>
+              <li>Em seguida, <strong>modificar o conteúdo</strong>: criar, modificar e excluir arquivos.</li>
+              <li>Para salvar, adicionamos as mudanças à <strong>área de preparação</strong> (stage).</li>
+              <li>Depois damos <strong>commit</strong> nas alterações, gravando-as definitivamente no repositório.</li>
+              <li>Pronto, temos a primeira versão! ✅</li>
+            </ol>
+            <h3 class="subsection-title" id="status-arquivos">Status dos arquivos</h3>
+            <div class="d-flex flex-wrap gap-3">
+              <div class="card flex-fill p-3 text-center" style="min-width:130px">
+                <span class="badge bg-warning text-dark fs-5 mb-2">U</span>
+                <strong>Untracked</strong>
+                <small class="text-secondary d-block mt-1">arquivo novo, não commitado</small>
+              </div>
+              <div class="card flex-fill p-3 text-center" style="min-width:130px">
+                <span class="badge bg-success fs-5 mb-2">A</span>
+                <strong>Adicionado</strong>
+                <small class="text-secondary d-block mt-1">arquivo na área de stage</small>
+              </div>
+              <div class="card flex-fill p-3 text-center" style="min-width:130px">
+                <span class="badge bg-info fs-5 mb-2">M</span>
+                <strong>Modificado</strong>
+                <small class="text-secondary d-block mt-1">arquivo rastreado com alterações</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="doc-section" id="comandos-basicos">
+            <h2 class="section-title">⌨️ Comandos básicos</h2>
+            <p>Você precisa estar dentro da pasta do projeto. Se for a primeira vez usando, configure e-mail e nome:</p>
+            <pre><code class="language-bash">git config --global user.email "seu@email.com"
+git config --global user.name "seu nome"</code></pre>
+            <div class="table-responsive mt-3">
+              <table class="table table-sm table-hover align-middle">
+                <thead><tr><th>Comando</th><th>Descrição</th></tr></thead>
+                <tbody>
+                  <tr><td><code>git --version</code></td><td>Verifica a versão do Git instalada.</td></tr>
+                  <tr><td><code>git init --help</code></td><td>Mostra as descrições e comandos do <code>git init</code>.</td></tr>
+                  <tr><td><code>git init</code></td><td>Inicia o repositório na pasta (cria a pasta oculta <code>.git</code>).</td></tr>
+                  <tr><td><code>git status</code></td><td>Exibe a situação atual da working tree.</td></tr>
+                  <tr><td><code>git rm --cached nomeArquivo</code></td><td>Faz com que o arquivo volte a não ser monitorado.</td></tr>
+                  <tr><td><code>git add .</code></td><td>Adiciona todos os arquivos modificados ("M") e não rastreáveis ("U") à stage.</td></tr>
+                  <tr><td><code>git commit</code></td><td>Registra as alterações preparadas no histórico de forma definitiva.</td></tr>
+                  <tr><td><code>git commit -m "mensagem"</code></td><td>Faz commit com uma descrição do que foi feito.</td></tr>
+                  <tr><td><code>git restore</code></td><td>Reverte as alterações em um arquivo, voltando ao último commit.</td></tr>
+                  <tr><td><code>git log</code></td><td>Mostra o histórico de commits.</td></tr>
+                  <tr><td><code>git diff</code></td><td>Mostra as alterações entre commits, entre commit e working tree, etc.</td></tr>
+                  <tr><td><code>git merge</code></td><td>Integra mudanças entre branches.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section" id="boas-praticas">
+            <h2 class="section-title">✅ Boas práticas de commits</h2>
+            <ul class="d-flex flex-column gap-2">
+              <li><strong>Nomeie seus commits com cuidado:</strong> use o <code>commit -m</code> com uma mensagem clara, explicando o que foi feito, para que quem olhar entenda facilmente.</li>
+              <li>Existe uma convenção de padrões de commits: <a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank" rel="noopener">conventionalcommits.org</a></li>
+              <li>Revise suas mudanças antes de commitá-las; teste localmente e execute os testes automatizados.</li>
+              <li>Faça <strong>commits pequenos e frequentes</strong> — a revisão fica melhor, a mensagem mais explicativa e a reversão menos agressiva.</li>
+              <li>Faça um commit após terminar cada pequena alteração.</li>
+            </ul>
+          </section>
+
+          <section class="doc-section" id="semantic-versioning">
+            <h2 class="section-title">🏷️ Tipos de versão (Semantic Versioning)</h2>
+            <p>Formato: <code>MAJOR.MINOR.PATCH</code> (ex.: <code>1.4.2</code>). Cada número tem um papel:</p>
+            <div class="d-flex flex-wrap gap-3 mt-3">
+              <div class="card flex-fill p-3" style="min-width:160px; border-color:var(--accent)">
+                <span class="badge rounded-pill mb-2" style="background:var(--accent);width:fit-content">MAJOR</span>
+                <p class="small mb-0">Nova funcionalidade ou mudanças grandes — geralmente quebra compatibilidade.</p>
+              </div>
+              <div class="card flex-fill p-3" style="min-width:160px">
+                <span class="badge bg-success rounded-pill mb-2" style="width:fit-content">MINOR</span>
+                <p class="small mb-0">Melhorias e funcionalidades que não alteram o fluxo geral da aplicação.</p>
+              </div>
+              <div class="card flex-fill p-3" style="min-width:160px">
+                <span class="badge bg-info rounded-pill mb-2" style="width:fit-content">PATCH</span>
+                <p class="small mb-0">Correções de bugs e pequenas melhorias sem alterar funcionalidades.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="doc-section" id="branches">
+            <h2 class="section-title">🌿 Branches</h2>
+            <p>Branches são ramificações que permitem trabalhar em diferentes linhas de desenvolvimento dentro de um mesmo repositório. Cada branch pode conter commits independentes — os devs trabalham em funcionalidades ou correções sem interferir na branch principal.</p>
+            <div class="d-flex gap-2 flex-wrap mb-3">
+              <span class="badge bg-dark border fs-6">🌳 Branch Main / Master = tronco da árvore</span>
+              <span class="badge bg-dark border fs-6">🌿 Branches = galhos ligados ao tronco</span>
+            </div>
+            <p class="text-secondary small">Elas ajudam a manter o histórico organizado e claro, além de facilitarem a colaboração — cada dev trabalha na sua própria branch e depois integra (merge) as mudanças.</p>
+
+            <h3 class="subsection-title" id="conceitos-branch">Conceitos de branch</h3>
+            <ul class="d-flex flex-column gap-2">
+              <li><strong>Branch principal</strong> (Master ou Main) — linha principal com o código limpo, que recebe as mudanças das outras branches.</li>
+              <li><strong>Branch de funcionalidade</strong> — criada a partir da principal; você desenvolve a funcionalidade e faz merge após testes positivos.</li>
+              <li><strong>Branch de correção</strong> — igual à de funcionalidade, mas voltada para correções de bugs.</li>
+            </ul>
+
+            <h3 class="subsection-title" id="exemplo-real">Exemplo real</h3>
+            <p class="text-secondary small">Em projetos é comum ter mais de uma branch principal:</p>
+            <div class="d-flex gap-3 flex-wrap">
+              <div class="card flex-fill p-3" style="min-width:140px; border-color:var(--bs-danger)">
+                <strong class="text-danger">Main</strong>
+                <small class="text-secondary">Principal (produção)</small>
+              </div>
+              <div class="card flex-fill p-3" style="min-width:140px; border-color:var(--bs-warning)">
+                <strong class="text-warning">Qualidade</strong>
+                <small class="text-secondary">Principal para testes</small>
+              </div>
+              <div class="card flex-fill p-3" style="min-width:140px; border-color:var(--bs-success)">
+                <strong class="text-success">Desenvolvimento</strong>
+                <small class="text-secondary">Novas funcionalidades e correções</small>
+              </div>
+            </div>
+
+            <h3 class="subsection-title" id="fluxo-branches">Trabalhando com branches — fluxo</h3>
+            <ol class="d-flex flex-column gap-2 mb-3">
+              <li>Entre na branch que deseja clonar: <code>git checkout nome-da-branch</code></li>
+              <li>
+                Crie e entre na nova branch: <code>git checkout -b nome-da-branch-nova</code><br>
+                <small class="text-secondary">Ou só crie sem entrar: <code>git branch nome-da-branch-nova</code></small><br>
+                <small class="text-secondary">💡 Use <code>git branch</code> para listar todas as branches existentes.</small>
+              </li>
+              <li>Para integrar as mudanças, entre na branch de destino e execute: <code>git merge nome-da-branch-que-ira-enviar</code></li>
+            </ol>
+            <div class="callout">
+              <strong>Outros comandos úteis:</strong>
+              <ul class="mb-0 mt-2 d-flex flex-column gap-1">
+                <li><code>git branch --help</code> — mostra todos os comandos de branch</li>
+                <li><code>git branch -d nome-da-branch</code> — apaga branches que não serão mais usadas</li>
+                <li><code>git branch -m novo-nome</code> — muda o nome da branch atual</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="doc-section" id="conflitos-merge">
+            <h2 class="section-title">⚡ Conflitos de merge</h2>
+            <p>Ocorrem quando o Git não consegue combinar automaticamente as mudanças de duas branches — geralmente por alterações conflitantes no mesmo trecho de código.</p>
+            <h3 class="subsection-title">Como identificar conflitos</h3>
+            <ul class="d-flex flex-column gap-2">
+              <li>O Git emite erro e informa os arquivos com conflito.</li>
+              <li>Os trechos conflitantes são marcados com: <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code></li>
+              <li><code>git merge --abort</code> — cancela o merge em andamento.</li>
+              <li>Após resolver, use <code>git add</code> e <code>git commit</code> para finalizar (ou use as opções da sua IDE).</li>
+            </ul>
+            <h3 class="subsection-title">Como evitar conflitos</h3>
+            <ul class="d-flex flex-column gap-2">
+              <li><strong>Comunicação regular</strong> com a equipe para evitar trabalhar nos mesmos arquivos e trechos.</li>
+              <li><strong>Pulls frequentes</strong> para manter a branch sempre atualizada.</li>
+              <li><strong>Commits pequenos e frequentes.</strong></li>
+            </ul>
+          </section>
+
+          <section class="doc-section" id="repos-remotos">
+            <h2 class="section-title">🌐 Repositórios remotos e GitHub</h2>
+            <p>São versões do projeto hospedadas na internet, que permitem que você e outros devs atuem no mesmo projeto de diferentes locais.</p>
+            <ul class="d-flex flex-column gap-1 mb-3">
+              <li>Facilitam o trabalho em equipe.</li>
+              <li>Servem como <strong>backup</strong> do código.</li>
+              <li>Possibilitam integração contínua e outras práticas de DevOps.</li>
+            </ul>
+            <p>O <strong>GitHub</strong> é uma plataforma de hospedagem de código com interface amigável, pull requests, issues, wikis, kanban e muito mais.</p>
+            <h3 class="subsection-title">Trabalhando com repositórios remotos</h3>
+            <ol class="d-flex flex-column gap-2">
+              <li>Clonar: <code>git clone url-repo</code></li>
+              <li>Enviar commits: <code>git push nome-do-remote nome-da-branch</code></li>
+              <li>Sincronizar e atualizar: <code>git pull nome-do-remote nome-da-branch</code></li>
+            </ol>
+          </section>
+
+          <section class="doc-section" id="ssh-setup">
+            <h2 class="section-title">🔑 SSH e setup inicial de repositório remoto</h2>
+            <ol class="d-flex flex-column gap-2 mb-3">
+              <li>Crie a pasta do repositório local.</li>
+              <li>Entre na pasta pelo terminal.</li>
+              <li>Use <code>git init</code> para iniciar o repositório local.</li>
+              <li>Crie o <code>README.md</code> para usar como base do primeiro commit.</li>
+            </ol>
+            <pre><code class="language-bash">git add README.md
+git commit -m "commit inicial"</code></pre>
+            <p class="mt-3">Adicione o remoto e faça o push:</p>
+            <pre><code class="language-bash">git remote add origin https://github.com/usuario/nomeDoRepositorio
+git push origin master</code></pre>
+            <h3 class="subsection-title">Configurando uma chave SSH</h3>
+            <p>No GitHub, em <em>Settings → SSH and GPG keys</em>, você registra chaves para validar o <code>git push</code>. Para criar a chave no terminal:</p>
+            <pre><code class="language-bash">ssh-keygen -C "email"</code></pre>
+            <p>Escolha o diretório e crie uma senha. Depois adicione a chave ao agente SSH:</p>
+            <pre><code class="language-bash">ssh-add caminho-do-arquivo</code></pre>
+            <p>Isso salva a chave privada no diretório e gera a chave pública para registrar no GitHub. Ao clonar, use o modo SSH.</p>
+          </section>
+
+          <section class="doc-section" id="fork">
+            <h2 class="section-title">🍴 Fork e contribuições em projetos</h2>
+            <p>O <strong>fork</strong> funciona como um clone de um repositório para a sua conta — você copia o repositório mantendo a referência ao projeto raiz. Assim, é possível contribuir para o projeto original, prática muito usada em código aberto.</p>
+          </section>
+
+          <section class="doc-section" id="gitignore">
+            <h2 class="section-title">🚫 Usando o <code>.gitignore</code></h2>
+            <p>Esse arquivo indica quais arquivos ou tipos de arquivos <strong>não devem ser considerados pelo Git</strong> (ex.: <code>node_modules</code>, <code>.env</code>).</p>
+            <ul class="d-flex flex-column gap-2">
+              <li>Crie o arquivo na raiz do projeto com o nome <code>.gitignore</code> e indique o que deve ser ignorado.</li>
+              <li>O Git emitirá erro ao tentar adicionar esses arquivos à stage.</li>
+              <li>Para manter uma pasta vazia monitorada, crie dentro dela um arquivo vazio chamado <code>.gitkeep</code>.</li>
+            </ul>
+          </section>
+
+          <section class="doc-section" id="fluxo-colaborativo">
+            <h2 class="section-title">🤝 Fluxo colaborativo</h2>
+            <ol class="d-flex flex-column gap-3">
+              <li>Clonar o repositório ou fazer o setup inicial.</li>
+              <li>Criar uma branch separada para a tarefa, a partir de uma branch inicial.</li>
+              <li>Mudar para a nova branch (<code>git checkout</code>) e fazer as alterações.</li>
+              <li>Preparar (<code>git add</code>) e guardar (<code>git commit</code>).</li>
+              <li>
+                Subir a branch e abrir um Pull Request: <code>git push origin branch</code>
+                <ul class="mt-2 d-flex flex-column gap-1">
+                  <li>GitHub → aba <strong>Pull requests</strong> → <strong>New pull request</strong> (ou clique em <strong>Compare &amp; pull request</strong>).</li>
+                  <li>Escolha: <code>base: master ← compare: sua-branch</code></li>
+                  <li>Dê um nome, adicione descrição e um reviewer se necessário.</li>
+                  <li>Clique em <strong>Create pull request</strong>.</li>
+                  <li>Sem conflitos e sem aprovação obrigatória: <strong>Merge pull request</strong> → delete a branch.</li>
+                </ul>
+              </li>
+              <li>O líder aprova (ou não) o PR e integra na branch principal (<code>git merge</code>).</li>
+              <li>Volte ao passo 2 e repita o loop. 🔁</li>
+            </ol>
+            <div class="callout mt-3">
+              💡 <strong>Dica:</strong> Se ficar muito tempo em uma branch, volte à principal e dê <code>git pull</code>; depois retorne à sua branch e faça um <code>merge</code> para puxar as atualizações.
+            </div>
+          </section>
+
+        </article>
+      </main>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+    const sections = document.querySelectorAll('section[id]');
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
